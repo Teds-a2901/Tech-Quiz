@@ -14,10 +14,10 @@ import Timer from "./Timer";
 
 const SECS_PER_QUESTION = 30;
 
-const dataURL =
+const DATA_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8000/questions"
-    : "/questions.json";
+    : "questions.json";
 
 const initialState = {
   questions: [],
@@ -105,7 +105,7 @@ export default function App() {
   );
 
   useEffect(function () {
-    fetch(dataURL)
+    fetch(DATA_URL)
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
