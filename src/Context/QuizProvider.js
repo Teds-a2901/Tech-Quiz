@@ -4,7 +4,7 @@ const SECS_PER_QUESTION = 30;
 const DATA_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8000/questions"
-    : "questions.json";
+    : "/questions.json";
 
 const QuizContext = createContext();
 
