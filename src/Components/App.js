@@ -25,6 +25,12 @@ const initialState = {
   highscore: 0,
   secondsRemaining: null,
 };
+useEffect(() => {
+  fetch("/questions.json")
+    .then((res) => res.json())
+    .then((data) => setQuestions(data))
+    .catch((err) => console.error("Fetch error:", err));
+}, []);
 
 function reducer(state, action) {
   switch (action.type) {
