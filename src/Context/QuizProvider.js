@@ -1,6 +1,10 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 
 const SECS_PER_QUESTION = 30;
+const DATA_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8000/questions"
+    : "questions.json";
 
 const QuizContext = createContext();
 
@@ -99,7 +103,7 @@ function QuizProvider({ children }) {
   const maxPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
 
   useEffect(function () {
-    fetch("http://localhost:8000/questions")
+    fetch(DATA_URL)
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataRecieved", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
