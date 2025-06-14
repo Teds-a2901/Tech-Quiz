@@ -6,12 +6,6 @@ import { QuizProvider } from "./Context/QuizProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  useEffect(() => {
-  fetch('/questions.json')
-    .then((res) => res.json())
-    .then((data) => setQuestions(data))
-    .catch((err) => console.error('Fetch error:', err));
-}, []);
   <React.StrictMode>
     <QuizProvider>
       <App />

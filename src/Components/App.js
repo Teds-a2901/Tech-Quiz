@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -25,12 +25,6 @@ const initialState = {
   highscore: 0,
   secondsRemaining: null,
 };
-useEffect(() => {
-  fetch("/questions.json")
-    .then((res) => res.json())
-    .then((data) => setQuestions(data))
-    .catch((err) => console.error("Fetch error:", err));
-}, []);
 
 function reducer(state, action) {
   switch (action.type) {
@@ -99,7 +93,7 @@ export default function App() {
     { questions, status, index, answer, points, highscore, secondsRemaining },
     dispatch,
   ] = useReducer(reducer, initialState);
-
+  const [questions1, setQuestions] = useState([]);
   const numQuestions = questions.length;
   const maxPossiblePoints = questions.reduce(
     (prev, cur) => prev + cur.points,
@@ -111,6 +105,13 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
+  }, []);
+
+  useEffect(() => {
+    fetch("/questions.json")
+      .then((res) => res.json())
+      .then((data) => setQuestions(data))
+      .catch((err) => console.error("Fetch error:", err));
   }, []);
 
   return (
