@@ -14,10 +14,12 @@ import Timer from "./Timer";
 
 const SECS_PER_QUESTION = 30;
 
-const DATA_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:8000/questions"
-    : "/questions.json";
+// const DATA_URL =
+//   process.env.NODE_ENV === "development"
+//     ? "http://localhost:8000/questions"
+//     : "/questions.json";
+
+const API_URL = "https://684d786365ed0871391633fe.mockapi.io/questions";
 
 const initialState = {
   questions: [],
@@ -105,7 +107,7 @@ export default function App() {
   );
 
   useEffect(function () {
-    fetch(DATA_URL)
+    fetch(API_URL)
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
