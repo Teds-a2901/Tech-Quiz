@@ -1,9 +1,7 @@
-import React from "react";
-import Questions from "./Questions";
-
-function NextButton({ dispatch, answer, index, numQuestioin }) {
+function NextButton({ dispatch, answer, index, numQuestions }) {
   if (answer === null) return null;
-  if (index < numQuestioin - 1)
+
+  if (index < numQuestions - 1)
     return (
       <button
         className="btn btn-ui"
@@ -13,13 +11,13 @@ function NextButton({ dispatch, answer, index, numQuestioin }) {
       </button>
     );
 
-  if (index === numQuestioin - 1)
+  if (index === numQuestions - 1)
     return (
       <button
         className="btn btn-ui"
-        onClick={() => dispatch({ type: "finished" })}
+        onClick={() => dispatch({ type: "finish" })}
       >
-        Finished
+        Finish
       </button>
     );
 }

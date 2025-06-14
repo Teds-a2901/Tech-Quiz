@@ -1,18 +1,20 @@
-import { type } from "@testing-library/user-event/dist/type";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 function Timer({ dispatch, secondsRemaining }) {
   const mins = Math.floor(secondsRemaining / 60);
   const seconds = secondsRemaining % 60;
+
   useEffect(
     function () {
-      const timerId = setInterval(function () {
-        dispatch({ type: "timer" });
+      const id = setInterval(function () {
+        dispatch({ type: "tick" });
       }, 1000);
-      return () => clearInterval(timerId);
+
+      return () => clearInterval(id);
     },
     [dispatch]
   );
+
   return (
     <div className="timer">
       {mins < 10 && "0"}
