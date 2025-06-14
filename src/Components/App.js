@@ -93,7 +93,6 @@ export default function App() {
     { questions, status, index, answer, points, highscore, secondsRemaining },
     dispatch,
   ] = useReducer(reducer, initialState);
-  const [setQuestions] = useState([]);
   const numQuestions = questions.length;
   const maxPossiblePoints = questions.reduce(
     (prev, cur) => prev + cur.points,
@@ -105,13 +104,6 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
-  }, []);
-
-  useEffect(() => {
-    fetch("/questions.json")
-      .then((res) => res.json())
-      .then((data) => setQuestions(data))
-      .catch((err) => console.error("Fetch error:", err));
   }, []);
 
   return (
